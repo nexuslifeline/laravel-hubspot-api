@@ -1,41 +1,39 @@
-Easy to use HubSpot API in Laravel 4
-===================
+Modified Fungku\HubSpot to support Laravel 5.5+
+=============================================================
 
-[![Latest Stable Version](https://poser.pugx.org/fungku/laravel-hubspot/v/stable.svg)](https://packagist.org/packages/fungku/laravel-hubspot) [![Total Downloads](https://poser.pugx.org/fungku/laravel-hubspot/downloads.svg)](https://packagist.org/packages/fungku/laravel-hubspot) [![Latest Unstable Version](https://poser.pugx.org/fungku/laravel-hubspot/v/unstable.svg)](https://packagist.org/packages/fungku/laravel-hubspot)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/laravel-hubspot-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/laravel-hubspot-api/?branch=master)
-[![License](https://poser.pugx.org/fungku/laravel-hubspot/license.svg)](https://packagist.org/packages/fungku/laravel-hubspot)
 
-PHP HubSpot API package for [Laravel 4](http://laravel.com/)
+HubSpot API package for [Laravel 5.5+](http://laravel.com/)
 
 Most of the hard-working code is modified classes from [HubSpot/haPiHP](https://github.com/HubSpot/haPiHP).
+This is a modified version of Fungku\HubSpot(https://packagist.org/packages/fungku/hubspot-php) to support Laravel version 5.5+.
 
 ## Setup
 
-In composer.json:
+1.) clone the repository to your project vendor folder
+
+2.) then run 
 
 ```
-"require": {
-	"fungku/laravel-hubspot": "1.1.*"
-}
+php artisan vendor:publish --provider="Fungku\HubSpot\HubSpotServiceProvider"
 ```
-then run `composer install` or `composer update`
 
-Open `app/config/app.php` and add this to the providers array:
+3.) Open `app/config/app.php` and add this to the providers array:
 
 ```
-'Fungku\HubSpot\HubSpotServiceProvider',
+Fungku\HubSpot\HubSpotServiceProvider::class,
+```
+
+and on the Class Aliases add this
+```
+'HubSpot' => Fungku\HubSpot\Facades\HubSpot::class,   
 ```
 
 TO SET YOUR API KEY:
-
-Run the following command: `$ php artisan config:publish fungku/laravel-hubspot`
-
-This will generate a config file to: `app/config/packages/fungku/laravel-hubspot/api.php`
-
-You can then update this file with your api key from HubSpot and set the user agent.
-
-You could also [set an environment variable](http://laravel.com/docs/configuration#protecting-sensitive-configuration) called, `HUBSPOT_APIKEY`
-
+Open your environment variables file(.env) and add this 
+```
+HUBSPOT_KEY=YOUR_API_KEY_HERE
+HUBSPOT_USER_AGENT=USER_AGENT_HERE
+```
 
 
 ## Examples
@@ -60,4 +58,3 @@ $lists = HubSpot::lists();
 // Get 20 lists
 $lists->get_lists(array('count'=>20));
 ```
-

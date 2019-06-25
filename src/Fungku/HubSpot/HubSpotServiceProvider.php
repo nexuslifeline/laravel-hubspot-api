@@ -1,7 +1,10 @@
 <?php namespace Fungku\HubSpot;
 
-use Illuminate\Support\ServiceProvider;
+use Fungku\HubSpot;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 
 class HubSpotServiceProvider extends ServiceProvider {
 
@@ -18,9 +21,13 @@ class HubSpotServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot()
-	{
-        $this->package('fungku/hubspot');
-        $this->package('fungku/laravel-hubspot');
+	{		
+		//Log::info(__DIR__);
+        //$this->package('fungku/hubspot');
+		//$this->package('fungku/laravel-hubspot');
+		$this->publishes([
+			__DIR__.'/../../config/hubspot.php' => config_path('hubspot.php')
+		]);
 	}
 
 	/**
@@ -30,21 +37,19 @@ class HubSpotServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		// Register 'hubspot' instance container to our HubSpot object
-        $this->app['hubspot'] = $this->app->share(function($app)
-        {
-            return new \Fungku\HubSpot(
-                \Config::get('laravel-hubspot::api.key'),
-                \Config::get('laravel-hubspot::api.useragent')
+		$this->app->singleton('hubspot', function ($app) {		
+			return new HubSpot(
+                Config::get('hubspot.key'),
+                Config::get('hubspot.useragent')
             );
-        });
+	   });	   
 
-        // Shortcut so developers don't need to add an Alias in app/config/app.php
-        $this->app->booting(function()
-        {
-            $loader = AliasLoader::getInstance();
-            $loader->alias('HubSpot', 'Fungku\HubSpot\Facades\HubSpot');
-        });
+        //Shortcut so developers don't need to add an Alias in app/config/app.php
+        // $this->app->booting(function()
+        // {
+        //     $loader = AliasLoader::getInstance();
+        //     $loader->alias('HubSpot', 'Fungku\HubSpot\Facades\HubSpot');
+        // });
 	}
 
 	/**
