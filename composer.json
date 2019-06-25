@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "fungku/hubspot": "1.0.*"
+        "nexuslifeline/hubspot": "1.0.*"
     },
     "autoload": {
         "classmap": [
