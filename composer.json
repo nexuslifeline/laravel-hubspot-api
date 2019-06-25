@@ -1,5 +1,5 @@
 {
-    "name": "nexus/laravel-hubspot",
+    "name": "nexuslifeline/laravel-hubspot",
     "description": "Based from fungku/laravel-hubspot to support Laravel 5.5+",
     "license": "Apache-2.0",
     "authors": [
