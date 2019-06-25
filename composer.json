@@ -1,11 +1,11 @@
 {
-    "name": "fungku/laravel-hubspot",
-    "description": "PHP HubSpot API wrapper for Laravel 4",
+    "name": "nexus/laravel-hubspot",
+    "description": "Based from fungku/laravel-hubspot to support Laravel 5.5+",
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Fungku",
-            "email": "fungku@gmail.com"
+            "name": "Paul Christian Rueda",
+            "email": "nexuslifeline@gmail.com@gmail.com"
         }
     ],
     "require": {
